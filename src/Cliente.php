@@ -40,6 +40,7 @@ class Cliente {
     public function mostrarTotalVendas(){
         echo "Total de Vendas: ".$this->totalVendas;
     }
+
     //Getters and Setters
         public function setNome($nome) { 
             if (is_string($nome)) $this->nome = $nome; 
@@ -88,7 +89,7 @@ class Cliente {
 } 
 
 $cliente = new Cliente; 
-$cliente->iniciaCliente('André', 'Rua santa maria', 'M', 22, '4500'); 
+$cliente->iniciaCliente('André', 'Rua santa maria', 'M', 22, 4500); 
 $cliente->mostrarDados($cliente);
 
 $cliente->vender(4000);
