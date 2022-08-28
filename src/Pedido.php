@@ -1,7 +1,7 @@
 <?php
 class Pedido { 
 	private $codigoPedido; 	private $data;  private $taxaImposto;  private $valorFrete;  private $totalPedido = 0; 
-    private $totalImposto = 0; private $totalItens = 0;
+    private $totalImposto = 0; private $totalItens = 0; private $totalItensVendidos = 0;
 
     public function iniciaPedido($codigoPedido, $data, $taxaImposto, $valorFrete){
         $this->setCodigoPedido($codigoPedido);
@@ -15,12 +15,36 @@ class Pedido {
        echo "Data: ".$this->getData().PHP_EOL; 
        echo "Taxa Imposto: ".$this->getTaxaImposto().PHP_EOL; 
        echo "Valor Frete: ".$this->getValorFrete().PHP_EOL.PHP_EOL; 
-       echo "Total de Pedidos: ".$this->getTotalPedidos().PHP_EOL; 
        echo "Total de Imposto: ".$this->getTotalImposto().PHP_EOL; 
-       echo "Total de Itens: ".$this->getTotalItens().PHP_EOL; 
+       echo "Total de Itens: ".$this->getTotalItens().PHP_EOL.PHP_EOL; 
+
+       echo "Valor Total: ".$this->getTotalPedido().PHP_EOL; 
+       echo "Total itens Vendidos: ".$this->getTotalItensVendidos().PHP_EOL; 
+
 
     }
 
+    public function incluirItemPedido($itens, $valor = 0){
+        if($itens != null) $this->totalItens = $this->getTotalItens() + $itens;
+        if($valor != null){
+             $this->totalPedido = $this->getTotalPedido() + $valor;       
+             $this->totalizarItens($itens);
+        } 
+
+        
+    }
+
+    public function totalizarItens($itens){
+        $this->totalItensVendidos = $this->getTotalItensVendidos() + $itens;
+    }
+
+    public function calcularImposto(){
+        $this->totalImposto = ($this->getTotalPedido())*($this->getTaxaImposto()/100);
+    }
+
+    public function calcularTotalPedido(){
+        $this->totalPedido = $this->getTotalPedido() + $this->getTotalImposto() + $this->getValorFrete();
+    }
    
     //Getters and Setters
         public function setCodigoPedido($codigoPedido) { 
@@ -58,7 +82,7 @@ class Pedido {
             return $this->valorFrete; 
         } 
 
-        public function getTotalPedidos() { 
+        public function getTotalPedido() { 
             return $this->totalPedido; 
         } 
 
@@ -70,8 +94,23 @@ class Pedido {
             return $this->totalItens; 
         } 
 
+        public function getTotalItensVendidos() { 
+            return $this->totalItensVendidos; 
+        } 
+
 } 
 
 $pedido = new Pedido; 
 $pedido->iniciaPedido(1, '28/08/2022', 10, 50); 
+
+$pedido->incluirItemPedido(1, 400);
+$pedido->incluirItemPedido(2, 100);
+$pedido->incluirItemPedido(4);
+$pedido->incluirItemPedido(1, 500);
+
+$pedido->calcularImposto();
+$pedido->calcularTotalPedido();
+
 $pedido->mostrarDados($pedido);
+
+
