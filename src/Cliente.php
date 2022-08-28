@@ -27,7 +27,19 @@ class Cliente {
         return true;
     }
 	
+    public function limiteOK($valor){
+        if (($valor - $this->getLimiteCredito()) > 0) return false;
 
+        return true;
+    }
+
+    public function vender($valor){
+        if($this->vendaOK($valor) && $this->limiteOK($valor)) $this->totalVendas = $this->totalVendas + 1;
+    }
+
+    public function mostrarTotalVendas(){
+        echo "Total de Vendas: ".$this->totalVendas;
+    }
     //Getters and Setters
         public function setNome($nome) { 
             if (is_string($nome)) $this->nome = $nome; 
@@ -76,7 +88,13 @@ class Cliente {
 } 
 
 $cliente = new Cliente; 
-$cliente->iniciaCliente('André', 'Rua santa maria', 'M', 22, '20000'); 
+$cliente->iniciaCliente('André', 'Rua santa maria', 'M', 22, '4500'); 
 $cliente->mostrarDados($cliente);
-$cliente->vendaOK(6000);
-$cliente->vendaOK(4000);
+
+$cliente->vender(4000);
+$cliente->vender(14000);
+$cliente->vender(4600);
+$cliente->vender(200);
+$cliente->vender(1);
+
+$cliente->mostrarTotalVendas();
