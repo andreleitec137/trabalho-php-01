@@ -13,12 +13,11 @@ class Cliente {
     }
 
     public function mostrarDados($clientes){
-       echo "Nome: ".$this->getEndereco().PHP_EOL;  
+       echo "Nome: ".$this->getNome().PHP_EOL;  
        echo "Endereco: ".$this->getEndereco().PHP_EOL; 
        echo "Sexo: ".$this->getSexo().PHP_EOL; 
        echo "Idade: ".$this->getIdade().PHP_EOL; 
        echo "Limite: ".$this->getLimiteCredito().PHP_EOL; 
-
     }
 
     public function vendaOK($valor){
