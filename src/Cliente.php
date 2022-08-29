@@ -22,7 +22,7 @@ class Cliente {
 
     public function vendaOK($valor){
         if ($valor > $this->limiteOperacao) return false;
-    
+
         return true;
     }
 	

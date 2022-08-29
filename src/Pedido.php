@@ -20,8 +20,6 @@ class Pedido {
 
        echo "Valor Total: ".$this->getTotalPedido().PHP_EOL; 
        echo "Total itens Vendidos: ".$this->getTotalItensVendidos().PHP_EOL; 
-
-
     }
 
     public function incluirItemPedido($itens, $valor = 0){
@@ -30,8 +28,6 @@ class Pedido {
              $this->totalPedido = $this->getTotalPedido() + $valor;       
              $this->totalizarItens($itens);
         } 
-
-        
     }
 
     public function totalizarItens($itens){
